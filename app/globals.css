@@ -7,28 +7,32 @@
   --bg-surface: #DFE9E3;
   --bg-card: #FFFFFF;
   --text-primary: #1B2623;
-  --text-secondary: #5C6862;
+  --text-secondary: #53645E;
   --border-subtle: #D5DBD2;
+  --border-card: #E2E7E0;
   --accent-teal: #385A54;
   --accent-blue: #779AA0;
   --accent-sage: #A6BDB0;
+  --plot-bg: #FBFBF9;
 }
 
 .dark {
   --bg-primary: #111917;
-  --bg-surface: #1A2623;
+  --bg-surface: #182420;
   --bg-card: #1F2D29;
   --text-primary: #EDF2EF;
   --text-secondary: #A3B3AC;
-  --border-subtle: #2D3F3A;
+  --border-subtle: #2A3B35;
+  --border-card: #273832;
   --accent-teal: #A6BDB0;
   --accent-blue: #779AA0;
   --accent-sage: #385A54;
+  --plot-bg: #182420;
 }
 
 @layer base {
   html {
-    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Devanagari", sans-serif;
+    font-family: var(--font-inter), "Inter", var(--font-devanagari), "Noto Sans Devanagari", system-ui, -apple-system, sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -39,10 +43,24 @@
   }
 }
 
+/* Restrained input controls */
 input[type="range"] {
   accent-color: #385A54;
 }
 
 .dark input[type="range"] {
   accent-color: #A6BDB0;
+}
+
+/* Translucent & Opaque surface utility classes */
+.card-translucent {
+  @apply bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.03)];
+}
+
+.card-opaque {
+  @apply bg-white dark:bg-[#1C2825] border border-[var(--border-subtle)] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.04)];
+}
+
+.chart-plot-area {
+  background-color: var(--plot-bg);
 }

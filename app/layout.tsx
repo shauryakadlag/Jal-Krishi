@@ -1,5 +1,19 @@
 import type { Metadata } from "next";
+import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-devanagari",
+});
 
 export const metadata: Metadata = {
   title: "Jal-Krishi AI | जल-कृषी",
@@ -26,7 +40,9 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className="min-h-screen font-sans">{children}</body>
+      <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans`}>
+        {children}
+      </body>
     </html>
   );
 }

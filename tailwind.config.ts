@@ -49,7 +49,7 @@ const config: Config = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "system-ui", "-apple-system", "Segoe UI", "Roboto", "Noto Sans Devanagari", "sans-serif"],
+        sans: ["var(--font-inter)", "Inter", "var(--font-devanagari)", "Noto Sans Devanagari", "system-ui", "-apple-system", "sans-serif"],
       },
     },
   },

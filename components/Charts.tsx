@@ -5,6 +5,7 @@ import {
   BarChart,
   CartesianGrid,
   Cell,
+  Legend,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -12,13 +13,17 @@ import {
 } from "recharts";
 import type { CropAnalysisResult } from "@/lib/types";
 
-export function WaterBalanceBarChart({
-  crop,
-  lang,
-}: {
+interface ChartProps {
   crop: CropAnalysisResult;
   lang: "mr" | "en";
-}) {
+}
+
+interface MultiCropChartProps {
+  crops: CropAnalysisResult[];
+  lang: "mr" | "en";
+}
+
+export function WaterBalanceBarChart({ crop, lang }: ChartProps) {
   const data = [
     {
       name: lang === "mr" ? "गरज (ETc)" : "Demand (ETc)",
@@ -38,18 +43,23 @@ export function WaterBalanceBarChart({
     {
       name: lang === "mr" ? "तूट (Gap)" : "Water Gap",
       mm: crop.water_gap_mm,
-      fill: "#B83B35",
+      fill: crop.water_gap_mm > 0 ? "#B83B35" : "#385A54",
     },
   ];
 
   return (
-    <div className="h-56 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-2 border border-[var(--border-subtle)]">
+    <div className="h-60 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-3 border border-[var(--border-subtle)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 8, left: -10, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
+        <BarChart data={data} margin={{ top: 12, right: 12, left: -6, bottom: 6 }}>
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--border-subtle)"
+            strokeOpacity={0.8}
+            vertical={true}
+          />
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            tick={{ fontSize: 11, fill: "var(--text-secondary)", fontWeight: 500 }}
             axisLine={{ stroke: "var(--border-subtle)" }}
             tickLine={false}
           />
@@ -67,9 +77,10 @@ export function WaterBalanceBarChart({
               backgroundColor: "var(--bg-card)",
               borderColor: "var(--border-subtle)",
               color: "var(--text-primary)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           />
-          <Bar dataKey="mm" radius={[6, 6, 0, 0]} maxBarSize={44}>
+          <Bar dataKey="mm" radius={[4, 4, 0, 0]} maxBarSize={48}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}
@@ -80,13 +91,7 @@ export function WaterBalanceBarChart({
   );
 }
 
-export function ScoreWaterfallChart({
-  crop,
-  lang,
-}: {
-  crop: CropAnalysisResult;
-  lang: "mr" | "en";
-}) {
+export function ScoreWaterfallChart({ crop, lang }: ChartProps) {
   const data = [
     {
       name: lang === "mr" ? "पाणी (45%)" : "Water (45%)",
@@ -111,13 +116,18 @@ export function ScoreWaterfallChart({
   ];
 
   return (
-    <div className="h-52 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-2 border border-[var(--border-subtle)]">
+    <div className="h-60 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-3 border border-[var(--border-subtle)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 8, left: -14, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
+        <BarChart data={data} margin={{ top: 12, right: 12, left: -10, bottom: 6 }}>
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--border-subtle)"
+            strokeOpacity={0.8}
+            vertical={true}
+          />
           <XAxis
             dataKey="name"
-            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            tick={{ fontSize: 11, fill: "var(--text-secondary)", fontWeight: 500 }}
             axisLine={{ stroke: "var(--border-subtle)" }}
             tickLine={false}
           />
@@ -135,13 +145,73 @@ export function ScoreWaterfallChart({
               backgroundColor: "var(--bg-card)",
               borderColor: "var(--border-subtle)",
               color: "var(--text-primary)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
             }}
           />
-          <Bar dataKey="score" radius={[6, 6, 0, 0]} maxBarSize={44}>
+          <Bar dataKey="score" radius={[4, 4, 0, 0]} maxBarSize={48}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}
           </Bar>
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
+}
+
+export function CropsComparisonBarChart({ crops, lang }: MultiCropChartProps) {
+  const data = crops.map((c) => ({
+    name: lang === "mr" ? c.name_mr : c.name_en,
+    demand: c.water_demand_etc_mm,
+    available: Math.round(c.effective_rain_mm + c.reliable_irrigation_mm),
+    gap: c.water_gap_mm,
+  }));
+
+  const labelDemand = lang === "mr" ? "पाण्याची गरज (ETc)" : "Water Demand (ETc)";
+  const labelAvailable = lang === "mr" ? "उपलब्ध पाणी (पाऊस+सिंचन)" : "Available Water";
+  const labelGap = lang === "mr" ? "पाण्याची तूट (Gap)" : "Water Deficit";
+
+  return (
+    <div className="h-72 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-3 border border-[var(--border-subtle)] shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={data} margin={{ top: 12, right: 12, left: -6, bottom: 6 }}>
+          <CartesianGrid
+            strokeDasharray="3 3"
+            stroke="var(--border-subtle)"
+            strokeOpacity={0.8}
+            vertical={true}
+          />
+          <XAxis
+            dataKey="name"
+            tick={{ fontSize: 11, fill: "var(--text-secondary)", fontWeight: 500 }}
+            axisLine={{ stroke: "var(--border-subtle)" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={{ stroke: "var(--border-subtle)" }}
+            tickLine={false}
+            unit=" mm"
+          />
+          <Tooltip
+            formatter={(val: number, name: string) => [`${val} mm`, name]}
+            contentStyle={{
+              fontSize: 12,
+              borderRadius: 8,
+              backgroundColor: "var(--bg-card)",
+              borderColor: "var(--border-subtle)",
+              color: "var(--text-primary)",
+              boxShadow: "0 2px 8px rgba(0,0,0,0.08)",
+            }}
+          />
+          <Legend
+            verticalAlign="top"
+            height={32}
+            wrapperStyle={{ fontSize: 11, paddingBottom: 6 }}
+          />
+          <Bar name={labelDemand} dataKey="demand" fill="#385A54" radius={[4, 4, 0, 0]} maxBarSize={32} />
+          <Bar name={labelAvailable} dataKey="available" fill="#779AA0" radius={[4, 4, 0, 0]} maxBarSize={32} />
+          <Bar name={labelGap} dataKey="gap" fill="#B83B35" radius={[4, 4, 0, 0]} maxBarSize={32} />
         </BarChart>
       </ResponsiveContainer>
     </div>
