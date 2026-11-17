@@ -1,0 +1,19 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    font-family: var(--font-mukta), var(--font-noto-devanagari), system-ui, sans-serif;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-soil-50 text-soil-900 antialiased;
+  }
+}
+
+/* Custom range slider for touch-friendly What-If */
+input[type="range"] {
+  accent-color: #2e7d32;
+}

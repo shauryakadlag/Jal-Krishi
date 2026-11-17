@@ -1,0 +1,47 @@
+[
+  {
+    "location_id": "latur",
+    "assessment_unit": "Latur",
+    "district": "Latur",
+    "category": "SEMI_CRITICAL",
+    "stage_of_extraction_pct": 70.7,
+    "geographic_level": "TALUKA_ASSESSMENT_UNIT",
+    "report_title": "Dynamic Groundwater Resources of Maharashtra 2023",
+    "assessment_year": "2022-23",
+    "published_date": "March 2024",
+    "agency": "GSDA / CGWB",
+    "page_or_table": "Detailed Assessment-Unit Tables (GWRE-State-Report-2022-23)",
+    "retrieved_on": "2026-11-17",
+    "verification_status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "location_id": "baramati",
+    "assessment_unit": "Baramati",
+    "district": "Pune",
+    "category": "SEMI_CRITICAL",
+    "stage_of_extraction_pct": 80.4,
+    "geographic_level": "TALUKA_ASSESSMENT_UNIT",
+    "report_title": "Dynamic Groundwater Resources of Maharashtra 2023",
+    "assessment_year": "2022-23",
+    "published_date": "March 2024",
+    "agency": "GSDA / CGWB",
+    "page_or_table": "Detailed Assessment-Unit Tables (GWRE-State-Report-2022-23)",
+    "retrieved_on": "2026-11-17",
+    "verification_status": "VERIFIED_OFFICIAL"
+  },
+  {
+    "location_id": "nagpur",
+    "assessment_unit": "Nagpur",
+    "district": "Nagpur",
+    "category": "SAFE",
+    "stage_of_extraction_pct": 46.5,
+    "geographic_level": "TALUKA_ASSESSMENT_UNIT",
+    "report_title": "Dynamic Groundwater Resources of Maharashtra 2023",
+    "assessment_year": "2022-23",
+    "published_date": "March 2024",
+    "agency": "GSDA / CGWB",
+    "page_or_table": "Detailed Assessment-Unit Tables (GWRE-State-Report-2022-23)",
+    "retrieved_on": "2026-11-17",
+    "verification_status": "VERIFIED_OFFICIAL"
+  }
+]

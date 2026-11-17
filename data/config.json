@@ -1,0 +1,32 @@
+{
+  "config_version": "1.0.0-proto",
+  "verification_status": "UNVALIDATED_PROTOTYPE_ASSUMPTION",
+  "weights": {
+    "water_fit": 0.45,
+    "stage_fit": 0.20,
+    "season_fit": 0.20,
+    "heat_fit": 0.15
+  },
+  "irrigation_nominal_mm": {
+    "RAINFED": 0,
+    "LIMITED": 150,
+    "ASSURED": 400
+  },
+  "groundwater_reliability": {
+    "SAFE": 1.0,
+    "SEMI_CRITICAL": 0.7,
+    "CRITICAL": 0.4,
+    "OVER_EXPLOITED": 0.3,
+    "UNKNOWN": 0.0
+  },
+  "suitability_bands": {
+    "better_suited_min": 70,
+    "possible_min": 40
+  },
+  "water_risk_thresholds": {
+    "low_max": 0.15,
+    "moderate_max": 0.35,
+    "high_max": 0.60
+  },
+  "litres_per_mm_per_acre": 4047
+}
