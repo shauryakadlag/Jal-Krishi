@@ -43,10 +43,10 @@ export function WaterBalanceBarChart({
   ];
 
   return (
-    <div className="h-56 w-full">
+    <div className="h-56 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-2 border border-[var(--border-subtle)]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 8, left: -10, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
           <XAxis
             dataKey="name"
             tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
@@ -55,7 +55,7 @@ export function WaterBalanceBarChart({
           />
           <YAxis
             tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
-            axisLine={false}
+            axisLine={{ stroke: "var(--border-subtle)" }}
             tickLine={false}
             unit=" mm"
           />
@@ -63,13 +63,13 @@ export function WaterBalanceBarChart({
             formatter={(val: number) => [`${val} mm`, ""]}
             contentStyle={{
               fontSize: 12,
-              borderRadius: 10,
+              borderRadius: 8,
               backgroundColor: "var(--bg-card)",
               borderColor: "var(--border-subtle)",
               color: "var(--text-primary)",
             }}
           />
-          <Bar dataKey="mm" radius={[8, 8, 0, 0]}>
+          <Bar dataKey="mm" radius={[6, 6, 0, 0]} maxBarSize={44}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}
@@ -111,10 +111,10 @@ export function ScoreWaterfallChart({
   ];
 
   return (
-    <div className="h-52 w-full">
+    <div className="h-52 w-full rounded-lg bg-[#FBFBF9] dark:bg-[#182420] p-2 border border-[var(--border-subtle)]">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 10, right: 8, left: -14, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" vertical={false} />
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" />
           <XAxis
             dataKey="name"
             tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
@@ -124,20 +124,20 @@ export function ScoreWaterfallChart({
           <YAxis
             domain={[0, 100]}
             tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
-            axisLine={false}
+            axisLine={{ stroke: "var(--border-subtle)" }}
             tickLine={false}
           />
           <Tooltip
             formatter={(val: number) => [`${val} / 100`, ""]}
             contentStyle={{
               fontSize: 12,
-              borderRadius: 10,
+              borderRadius: 8,
               backgroundColor: "var(--bg-card)",
               borderColor: "var(--border-subtle)",
               color: "var(--text-primary)",
             }}
           />
-          <Bar dataKey="score" radius={[8, 8, 0, 0]}>
+          <Bar dataKey="score" radius={[6, 6, 0, 0]} maxBarSize={44}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}

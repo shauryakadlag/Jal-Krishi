@@ -428,17 +428,9 @@ export default function JalKrishiApp() {
           {/* TAB 1: COMPACT WELCOME & SETUP */}
           {tab === "setup" && (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 items-start">
-              {/* Compact Welcome Section with subtle botanical SVG */}
-              <section className="lg:col-span-5 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-5 shadow-md relative overflow-hidden">
-                <svg
-                  className="pointer-events-none absolute -right-6 -bottom-6 w-40 h-40 text-sage/20 dark:text-sage/10"
-                  viewBox="0 0 120 120"
-                  fill="currentColor"
-                  aria-hidden="true"
-                >
-                  <path d="M60 10C35 30 20 55 20 80c0 16 14 28 40 28s40-12 40-28C100 55 85 30 60 10zm0 18c15 16 24 34 24 52 0 9-9 16-24 16s-24-7-24-16c0-18 9-36 24-52z" />
-                </svg>
-                <div className="relative space-y-2">
+              {/* Compact Welcome Section */}
+              <section className="lg:col-span-5 rounded-xl bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] p-5 shadow-sm">
+                <div className="space-y-2">
                   <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-mutedblue">
                     {lang === "mr" ? "महाराष्ट्र जल-बुद्धिमत्ता" : "Maharashtra Climate Intelligence"}
                   </span>
@@ -522,7 +514,7 @@ export default function JalKrishiApp() {
               </section>
 
               {/* Main Input Form */}
-              <section className="lg:col-span-7 rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-5 shadow-md space-y-4">
+              <section className="lg:col-span-7 rounded-xl bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] p-5 shadow-sm space-y-4">
                 <h2 className="text-base font-bold text-forestteal dark:text-sage">
                   {lang === "mr" ? "शेती आणि हंगाम माहिती" : "Farm & Season Parameters"}
                 </h2>
@@ -1085,14 +1077,14 @@ export default function JalKrishiApp() {
               </section>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <section className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-4 shadow-sm space-y-2">
+                <section className="rounded-xl bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] p-4 shadow-sm space-y-2">
                   <h3 className="text-xs font-bold text-[var(--text-secondary)]">
                     {lang === "mr" ? "पाण्याची मागणी विरुद्ध पुरवठा (mm)" : "Water Demand vs Supply (mm)"}
                   </h3>
                   <WaterBalanceBarChart crop={selectedCrop} lang={lang} />
                 </section>
 
-                <section className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border-subtle)] p-4 shadow-sm space-y-2">
+                <section className="rounded-xl bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] p-4 shadow-sm space-y-2">
                   <h3 className="text-xs font-bold text-[var(--text-secondary)]">
                     {lang === "mr" ? "गुण विभागणी (Waterfall)" : "Score Breakdown"}
                   </h3>
