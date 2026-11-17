@@ -199,9 +199,9 @@ export default function JalKrishiApp() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-soil-50">
+    <div className="min-h-screen flex flex-col bg-gradient-to-b from-leaf-50/70 via-soil-50 to-water-50/50">
       {/* Sticky Mobile-First Header */}
-      <header className="sticky top-0 z-30 bg-leaf-700 text-white shadow-md">
+      <header className="sticky top-0 z-30 bg-gradient-to-r from-leaf-700 to-leaf-600 text-white shadow-md">
         <div className="max-w-2xl mx-auto px-3 py-2.5 flex items-center justify-between gap-2">
           <div>
             <h1 className="text-lg font-bold leading-tight tracking-tight">
