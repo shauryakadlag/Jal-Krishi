@@ -1,0 +1,61 @@
+{
+  "version": "1.0.0-demo-sample",
+  "note": "Offline Demonstration Mode sample weather. Used only when both Live Open-Meteo and Cached last-live weather are unavailable. Never labelled as live.",
+  "sample_date": "2026-11-17T06:00:00+05:30",
+  "locations": {
+    "latur": {
+      "forecast_days": [
+        { "date": "2026-11-17", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 30.2, "tmin_c": 16.5, "precip_prob_pct": 5 },
+        { "date": "2026-11-18", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.5, "tmin_c": 16.8, "precip_prob_pct": 5 },
+        { "date": "2026-11-19", "rain_mm": 0.0, "et0_mm": 4.0, "tmax_c": 29.8, "tmin_c": 16.0, "precip_prob_pct": 10 },
+        { "date": "2026-11-20", "rain_mm": 1.2, "et0_mm": 3.8, "tmax_c": 29.1, "tmin_c": 17.0, "precip_prob_pct": 25 },
+        { "date": "2026-11-21", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 29.9, "tmin_c": 16.2, "precip_prob_pct": 10 },
+        { "date": "2026-11-22", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.4, "tmin_c": 15.9, "precip_prob_pct": 5 },
+        { "date": "2026-11-23", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.8, "tmin_c": 16.1, "precip_prob_pct": 5 },
+        { "date": "2026-11-24", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.5, "tmin_c": 16.0, "precip_prob_pct": 5 },
+        { "date": "2026-11-25", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 30.0, "tmin_c": 15.6, "precip_prob_pct": 5 },
+        { "date": "2026-11-26", "rain_mm": 0.0, "et0_mm": 4.0, "tmax_c": 29.6, "tmin_c": 15.4, "precip_prob_pct": 5 },
+        { "date": "2026-11-27", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 29.8, "tmin_c": 15.5, "precip_prob_pct": 5 },
+        { "date": "2026-11-28", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.1, "tmin_c": 15.8, "precip_prob_pct": 5 },
+        { "date": "2026-11-29", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.3, "tmin_c": 15.9, "precip_prob_pct": 5 },
+        { "date": "2026-11-30", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.6, "tmin_c": 16.1, "precip_prob_pct": 5 }
+      ]
+    },
+    "baramati": {
+      "forecast_days": [
+        { "date": "2026-11-17", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.6, "tmin_c": 16.9, "precip_prob_pct": 5 },
+        { "date": "2026-11-18", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.9, "tmin_c": 17.0, "precip_prob_pct": 5 },
+        { "date": "2026-11-19", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 30.1, "tmin_c": 16.4, "precip_prob_pct": 10 },
+        { "date": "2026-11-20", "rain_mm": 0.5, "et0_mm": 4.0, "tmax_c": 29.8, "tmin_c": 16.8, "precip_prob_pct": 20 },
+        { "date": "2026-11-21", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.3, "tmin_c": 16.5, "precip_prob_pct": 5 },
+        { "date": "2026-11-22", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.7, "tmin_c": 16.2, "precip_prob_pct": 5 },
+        { "date": "2026-11-23", "rain_mm": 0.0, "et0_mm": 4.4, "tmax_c": 31.0, "tmin_c": 16.4, "precip_prob_pct": 5 },
+        { "date": "2026-11-24", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.8, "tmin_c": 16.3, "precip_prob_pct": 5 },
+        { "date": "2026-11-25", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.3, "tmin_c": 15.9, "precip_prob_pct": 5 },
+        { "date": "2026-11-26", "rain_mm": 0.0, "et0_mm": 4.1, "tmax_c": 30.0, "tmin_c": 15.7, "precip_prob_pct": 5 },
+        { "date": "2026-11-27", "rain_mm": 0.0, "et0_mm": 4.2, "tmax_c": 30.2, "tmin_c": 15.8, "precip_prob_pct": 5 },
+        { "date": "2026-11-28", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.5, "tmin_c": 16.0, "precip_prob_pct": 5 },
+        { "date": "2026-11-29", "rain_mm": 0.0, "et0_mm": 4.3, "tmax_c": 30.6, "tmin_c": 16.1, "precip_prob_pct": 5 },
+        { "date": "2026-11-30", "rain_mm": 0.0, "et0_mm": 4.4, "tmax_c": 30.9, "tmin_c": 16.3, "precip_prob_pct": 5 }
+      ]
+    },
+    "nagpur": {
+      "forecast_days": [
+        { "date": "2026-11-17", "rain_mm": 0.0, "et0_mm": 3.8, "tmax_c": 29.4, "tmin_c": 15.8, "precip_prob_pct": 5 },
+        { "date": "2026-11-18", "rain_mm": 0.0, "et0_mm": 3.9, "tmax_c": 29.7, "tmin_c": 16.0, "precip_prob_pct": 5 },
+        { "date": "2026-11-19", "rain_mm": 0.0, "et0_mm": 3.7, "tmax_c": 29.0, "tmin_c": 15.5, "precip_prob_pct": 10 },
+        { "date": "2026-11-20", "rain_mm": 2.0, "et0_mm": 3.5, "tmax_c": 28.5, "tmin_c": 16.2, "precip_prob_pct": 30 },
+        { "date": "2026-11-21", "rain_mm": 0.0, "et0_mm": 3.8, "tmax_c": 29.2, "tmin_c": 15.7, "precip_prob_pct": 10 },
+        { "date": "2026-11-22", "rain_mm": 0.0, "et0_mm": 3.9, "tmax_c": 29.6, "tmin_c": 15.4, "precip_prob_pct": 5 },
+        { "date": "2026-11-23", "rain_mm": 0.0, "et0_mm": 4.0, "tmax_c": 30.0, "tmin_c": 15.6, "precip_prob_pct": 5 },
+        { "date": "2026-11-24", "rain_mm": 0.0, "et0_mm": 3.9, "tmax_c": 29.8, "tmin_c": 15.5, "precip_prob_pct": 5 },
+        { "date": "2026-11-25", "rain_mm": 0.0, "et0_mm": 3.8, "tmax_c": 29.3, "tmin_c": 15.1, "precip_prob_pct": 5 },
+        { "date": "2026-11-26", "rain_mm": 0.0, "et0_mm": 3.7, "tmax_c": 29.0, "tmin_c": 14.9, "precip_prob_pct": 5 },
+        { "date": "2026-11-27", "rain_mm": 0.0, "et0_mm": 3.8, "tmax_c": 29.2, "tmin_c": 15.0, "precip_prob_pct": 5 },
+        { "date": "2026-11-28", "rain_mm": 0.0, "et0_mm": 3.9, "tmax_c": 29.5, "tmin_c": 15.2, "precip_prob_pct": 5 },
+        { "date": "2026-11-29", "rain_mm": 0.0, "et0_mm": 3.9, "tmin_c": 15.3, "tmax_c": 29.7, "precip_prob_pct": 5 },
+        { "date": "2026-11-30", "rain_mm": 0.0, "et0_mm": 4.0, "tmax_c": 30.0, "tmin_c": 15.5, "precip_prob_pct": 5 }
+      ]
+    }
+  }
+}

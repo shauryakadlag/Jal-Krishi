@@ -1,0 +1,44 @@
+[
+  {
+    "id": "latur",
+    "name_en": "Latur",
+    "name_mr": "लातूर",
+    "district_en": "Latur",
+    "district_mr": "लातूर",
+    "taluka_en": "Latur",
+    "taluka_mr": "लातूर",
+    "lat": 18.41,
+    "lon": 76.56,
+    "agro_zone_en": "Marathwada Scarcity / Assured Rainfall Transition",
+    "agro_zone_mr": "मराठवाडा अवर्षणप्रवण / मध्यम पर्जन्य क्षेत्र",
+    "verification_status": "UNVALIDATED_PROTOTYPE_ASSUMPTION"
+  },
+  {
+    "id": "baramati",
+    "name_en": "Baramati",
+    "name_mr": "बारामती",
+    "district_en": "Pune",
+    "district_mr": "पुणे",
+    "taluka_en": "Baramati",
+    "taluka_mr": "बारामती",
+    "lat": 18.15,
+    "lon": 74.58,
+    "agro_zone_en": "Western Maharashtra Scarcity Zone",
+    "agro_zone_mr": "पश्चिम महाराष्ट्र अवर्षणप्रवण क्षेत्र",
+    "verification_status": "UNVALIDATED_PROTOTYPE_ASSUMPTION"
+  },
+  {
+    "id": "nagpur",
+    "name_en": "Nagpur",
+    "name_mr": "नागपूर",
+    "district_en": "Nagpur",
+    "district_mr": "नागपूर",
+    "taluka_en": "Nagpur",
+    "taluka_mr": "नागपूर",
+    "lat": 21.15,
+    "lon": 79.09,
+    "agro_zone_en": "Vidarbha Central / Moderate-High Rainfall Zone",
+    "agro_zone_mr": "विदर्भ मध्य / मध्यम-जास्त पर्जन्य क्षेत्र",
+    "verification_status": "UNVALIDATED_PROTOTYPE_ASSUMPTION"
+  }
+]
