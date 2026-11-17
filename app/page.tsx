@@ -267,7 +267,9 @@ export default function JalKrishiApp() {
           sidebarExpanded ? "w-60" : "w-16"
         }`}
       >
-        <div className="h-14 flex items-center justify-between px-3.5 border-b border-white/40 dark:border-cyan-500/20">
+        <div className={`h-14 flex items-center border-b border-white/40 dark:border-cyan-500/20 px-2 ${
+          sidebarExpanded ? "justify-between px-3.5" : "justify-center gap-1"
+        }`}>
           {sidebarExpanded ? (
             <div className="flex items-center gap-2.5 truncate">
               <div className="w-8 h-8 rounded-xl bg-gradient-to-br from-turquoise-400 to-[#086B7B] flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm border border-white/30">
@@ -278,19 +280,19 @@ export default function JalKrishiApp() {
                   {lang === "mr" ? "जल-कृषी AI" : "Jal-Krishi AI"}
                 </span>
                 <span className="text-[10px] text-mutedblue dark:text-cyan-400/80 block truncate leading-none font-medium">
-                  Deep Flowing Aqua
+                  Crystal Water AI
                 </span>
               </div>
             </div>
           ) : (
-            <div className="w-8 h-8 mx-auto rounded-xl bg-gradient-to-br from-turquoise-400 to-[#086B7B] flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm border border-white/30">
+            <div className="w-7 h-7 rounded-xl bg-gradient-to-br from-turquoise-400 to-[#086B7B] flex items-center justify-center text-white font-black text-xs shrink-0 shadow-sm border border-white/30" title="Jal-Krishi AI">
               💧
             </div>
           )}
           <button
             type="button"
             onClick={() => setSidebarExpanded((v) => !v)}
-            className="p-1.5 rounded-lg hover:bg-white/60 dark:hover:bg-cyan-500/20 text-[#086B7B] dark:text-turquoise-300 transition"
+            className="p-1.5 rounded-lg hover:bg-white/60 dark:hover:bg-cyan-500/20 text-[#086B7B] dark:text-turquoise-300 transition shrink-0"
             aria-label="Toggle sidebar"
             title={sidebarExpanded ? "Collapse sidebar" : "Expand sidebar"}
           >
@@ -428,18 +430,18 @@ export default function JalKrishiApp() {
           </div>
 
           <div className="flex items-center gap-2 shrink-0">
-            {/* World War Z Inspired Interface Sound Controls */}
-            <div className="relative">
+            {/* Functional Interface Sound & Volume Controls */}
+            <div className="flex items-center gap-1.5 px-2 py-1 rounded-lg border border-white/50 dark:border-cyan-500/30 bg-white/45 dark:bg-cyan-950/40 backdrop-blur-md">
               <button
                 type="button"
                 onClick={() => soundManager.toggleMuted()}
-                className={`p-2 rounded-lg border transition flex items-center gap-1.5 ${
+                className={`p-1.5 rounded-md transition flex items-center justify-center shrink-0 ${
                   soundState.isMuted
-                    ? "border-red-400/40 bg-red-500/10 text-red-500 dark:text-red-400"
-                    : "border-white/50 dark:border-cyan-500/30 bg-white/50 dark:bg-cyan-950/40 text-[#086B7B] dark:text-turquoise-300 hover:bg-white/80"
+                    ? "bg-red-500/15 text-red-500 dark:text-red-400"
+                    : "text-[#086B7B] dark:text-turquoise-300 hover:bg-white/60 dark:hover:bg-cyan-500/20"
                 }`}
-                title={soundState.isMuted ? "Unmute interface sound effects" : `Mute interface sounds (${Math.round(soundState.volume * 100)}%)`}
-                aria-label="Toggle interface sound"
+                title={soundState.isMuted ? "Unmute interface sound effects" : "Mute interface sounds"}
+                aria-label={soundState.isMuted ? "Unmute sound" : "Mute sound"}
               >
                 {soundState.isMuted ? (
                   <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
@@ -451,10 +453,30 @@ export default function JalKrishiApp() {
                     <path strokeLinecap="round" strokeLinejoin="round" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z" />
                   </svg>
                 )}
-                <span className="hidden sm:inline text-[10px] font-bold">
-                  {soundState.isMuted ? "MUTED" : `${Math.round(soundState.volume * 100)}%`}
-                </span>
               </button>
+
+              <div className="flex items-center gap-1.5">
+                <input
+                  type="range"
+                  min="0"
+                  max="1"
+                  step="0.05"
+                  value={soundState.isMuted ? 0 : soundState.volume}
+                  onChange={(e) => {
+                    const v = parseFloat(e.target.value);
+                    if (soundState.isMuted && v > 0) {
+                      soundManager.setMuted(false);
+                    }
+                    soundManager.setVolume(v);
+                  }}
+                  className="w-14 sm:w-20 h-1.5 bg-cyan-200/60 dark:bg-cyan-900/60 rounded-lg appearance-none cursor-pointer accent-[#086B7B] dark:accent-turquoise-400"
+                  title={`Interface sound volume: ${soundState.isMuted ? "0% (Muted)" : `${Math.round(soundState.volume * 100)}%`}`}
+                  aria-label="Interface sound volume slider"
+                />
+                <span className="text-[10px] font-mono font-bold w-7 text-right text-[var(--text-secondary)]">
+                  {soundState.isMuted ? "0%" : `${Math.round(soundState.volume * 100)}%`}
+                </span>
+              </div>
             </div>
 
             {/* Offline Simulation Toggle */}

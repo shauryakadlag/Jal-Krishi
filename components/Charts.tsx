@@ -48,7 +48,7 @@ export function WaterBalanceBarChart({ crop, lang }: ChartProps) {
   ];
 
   return (
-    <div className="h-60 w-full rounded-xl bg-white/60 dark:bg-[#07242E]/60 backdrop-blur-md p-3 border border-white/50 dark:border-cyan-400/20 shadow-inner">
+    <div className="h-60 w-full rounded-xl bg-white/25 dark:bg-[#07242E]/25 backdrop-blur-md p-3 border border-white/40 dark:border-cyan-400/15 shadow-sm">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 12, right: 12, left: -6, bottom: 6 }}>
           <CartesianGrid
@@ -73,7 +73,7 @@ export function WaterBalanceBarChart({ crop, lang }: ChartProps) {
             contentStyle={{
               fontSize: 12,
               borderRadius: 10,
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(255, 255, 255, 0.85)",
               borderColor: "rgba(46, 196, 182, 0.4)",
               color: "#084D5E",
               boxShadow: "0 8px 24px rgba(3, 42, 54, 0.15)",
@@ -116,7 +116,7 @@ export function ScoreWaterfallChart({ crop, lang }: ChartProps) {
   ];
 
   return (
-    <div className="h-60 w-full rounded-xl bg-white/60 dark:bg-[#07242E]/60 backdrop-blur-md p-3 border border-white/50 dark:border-cyan-400/20 shadow-inner">
+    <div className="h-60 w-full rounded-xl bg-white/25 dark:bg-[#07242E]/25 backdrop-blur-md p-3 border border-white/40 dark:border-cyan-400/15 shadow-sm">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 12, right: 12, left: -10, bottom: 6 }}>
           <CartesianGrid
@@ -141,7 +141,7 @@ export function ScoreWaterfallChart({ crop, lang }: ChartProps) {
             contentStyle={{
               fontSize: 12,
               borderRadius: 10,
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(255, 255, 255, 0.85)",
               borderColor: "rgba(46, 196, 182, 0.4)",
               color: "#084D5E",
               boxShadow: "0 8px 24px rgba(3, 42, 54, 0.15)",
@@ -172,7 +172,7 @@ export function CropsComparisonBarChart({ crops, lang }: MultiCropChartProps) {
   const labelGap = lang === "mr" ? "पाण्याची तूट (Gap)" : "Water Deficit";
 
   return (
-    <div className="h-72 w-full rounded-xl bg-white/60 dark:bg-[#07242E]/60 backdrop-blur-md p-3 border border-white/50 dark:border-cyan-400/20 shadow-inner">
+    <div className="h-72 w-full rounded-xl bg-white/25 dark:bg-[#07242E]/25 backdrop-blur-md p-3 border border-white/40 dark:border-cyan-400/15 shadow-sm">
       <ResponsiveContainer width="100%" height="100%">
         <BarChart data={data} margin={{ top: 12, right: 12, left: -6, bottom: 6 }}>
           <CartesianGrid
@@ -197,7 +197,7 @@ export function CropsComparisonBarChart({ crops, lang }: MultiCropChartProps) {
             contentStyle={{
               fontSize: 12,
               borderRadius: 10,
-              backgroundColor: "rgba(255, 255, 255, 0.9)",
+              backgroundColor: "rgba(255, 255, 255, 0.85)",
               borderColor: "rgba(46, 196, 182, 0.4)",
               color: "#084D5E",
               boxShadow: "0 8px 24px rgba(3, 42, 54, 0.15)",

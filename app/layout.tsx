@@ -41,9 +41,14 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans overflow-x-hidden relative`}>
-        {/* Full-Website Deep Flowing Aqua Background with Caustics and Subtle Ripples */}
+        {/* Full-Website Crystal-Clear Flowing Water Background with Visible Continuous Wave Motion */}
         <div className="water-world-bg" aria-hidden="true">
           <div className="water-caustics-layer" />
+          <div className="water-flow-waves">
+            <div className="water-wave water-wave-1" />
+            <div className="water-wave water-wave-2" />
+            <div className="water-wave water-wave-3" />
+          </div>
           <div className="water-ripples-layer" />
         </div>
         {children}
