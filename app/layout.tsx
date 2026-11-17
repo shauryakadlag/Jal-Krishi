@@ -1,11 +1,34 @@
 import type { Metadata } from "next";
+import { Inter, Noto_Sans_Devanagari } from "next/font/google";
 import "./globals.css";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-inter",
+});
+
+const notoSansDevanagari = Noto_Sans_Devanagari({
+  subsets: ["devanagari"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-devanagari",
+});
 
 export const metadata: Metadata = {
   title: "Jal-Krishi AI | जल-कृषी",
   description:
-    "Deterministic water-balance crop suitability and standing-crop protection advisor for drought-prone Maharashtra.",
+    "Climate-intelligence water-balance crop suitability and standing-crop protection advisor for Maharashtra.",
 };
+
+const themeInitScript = `
+(function() {
+  try {
+    var t = localStorage.getItem('jal_krishi_theme');
+    if (t === 'dark') document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();
+`;
 
 export default function RootLayout({
   children,
@@ -13,8 +36,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="mr">
-      <body className="min-h-screen bg-soil-50 text-soil-900 font-sans">
+    <html lang="mr" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
+      </head>
+      <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans`}>
         {children}
       </body>
     </html>
