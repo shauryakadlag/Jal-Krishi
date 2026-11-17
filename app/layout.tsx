@@ -40,7 +40,12 @@ export default function RootLayout({
       <head>
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
-      <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans`}>
+      <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans overflow-x-hidden relative`}>
+        {/* Full-Website Deep Flowing Aqua Background with Caustics and Subtle Ripples */}
+        <div className="water-world-bg" aria-hidden="true">
+          <div className="water-caustics-layer" />
+          <div className="water-ripples-layer" />
+        </div>
         {children}
       </body>
     </html>

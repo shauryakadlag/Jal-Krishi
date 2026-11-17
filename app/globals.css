@@ -3,31 +3,39 @@
 @tailwind utilities;
 
 :root {
-  --bg-primary: #F5F6F2;
-  --bg-surface: #DFE9E3;
+  /* Deep Flowing Aqua Palette - Light Mode */
+  --bg-primary: #053D4D;
+  --bg-surface: #0E5E72;
   --bg-card: #FFFFFF;
-  --text-primary: #1B2623;
-  --text-secondary: #53645E;
-  --border-subtle: #D5DBD2;
-  --border-card: #E2E7E0;
-  --accent-teal: #385A54;
-  --accent-blue: #779AA0;
-  --accent-sage: #A6BDB0;
-  --plot-bg: #FBFBF9;
+  --text-primary: #0A2228;
+  --text-secondary: #274D57;
+  --text-muted: #537782;
+  --border-subtle: rgba(255, 255, 255, 0.45);
+  --border-glass: rgba(255, 255, 255, 0.55);
+  --border-card: rgba(255, 255, 255, 0.5);
+  --accent-aqua: #0EA5B7;
+  --accent-teal: #086B7B;
+  --accent-turquoise: #2EC4B6;
+  --accent-blue: #21839A;
+  --plot-bg: rgba(255, 255, 255, 0.82);
 }
 
 .dark {
-  --bg-primary: #111917;
-  --bg-surface: #182420;
-  --bg-card: #1F2D29;
-  --text-primary: #EDF2EF;
-  --text-secondary: #A3B3AC;
-  --border-subtle: #2A3B35;
-  --border-card: #273832;
-  --accent-teal: #A6BDB0;
-  --accent-blue: #779AA0;
-  --accent-sage: #385A54;
-  --plot-bg: #182420;
+  /* Deep Flowing Aqua Palette - Dark Mode */
+  --bg-primary: #03151C;
+  --bg-surface: #06232D;
+  --bg-card: #07252F;
+  --text-primary: #E6F8FA;
+  --text-secondary: #8BC4D0;
+  --text-muted: #5B95A2;
+  --border-subtle: rgba(46, 196, 182, 0.18);
+  --border-glass: rgba(46, 196, 182, 0.28);
+  --border-card: rgba(46, 196, 182, 0.22);
+  --accent-aqua: #2ED1C0;
+  --accent-teal: #148B9D;
+  --accent-turquoise: #38E4D2;
+  --accent-blue: #38A3BC;
+  --plot-bg: rgba(5, 28, 36, 0.85);
 }
 
 @layer base {
@@ -37,30 +45,188 @@
   }
 
   body {
-    background-color: var(--bg-primary);
     color: var(--text-primary);
-    @apply antialiased transition-colors duration-200;
+    @apply antialiased transition-colors duration-300 min-h-screen relative selection:bg-cyan-500/30;
   }
 }
 
-/* Restrained input controls */
+/* Deep Flowing Aqua Animated Water Canvas */
+.water-world-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, #157A8C 0%, #084D5E 45%, #032A36 85%, #021B24 100%);
+  background-size: 200% 200%;
+  animation: waterDeepShift 26s ease-in-out infinite alternate;
+}
+
+.dark .water-world-bg {
+  background: radial-gradient(circle at 50% 25%, #0C3F4D 0%, #062732 45%, #03171F 80%, #010E14 100%);
+  background-size: 200% 200%;
+  animation: waterDeepShift 28s ease-in-out infinite alternate;
+}
+
+/* Underwater Light Caustic Rays */
+.water-caustics-layer {
+  position: absolute;
+  inset: -20%;
+  background-image: 
+    radial-gradient(ellipse 65% 50% at 20% 30%, rgba(46, 196, 182, 0.28), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 80% 65%, rgba(14, 165, 183, 0.22), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 85%, rgba(18, 126, 148, 0.25), transparent 60%),
+    radial-gradient(circle at 65% 20%, rgba(100, 230, 220, 0.16), transparent 40%);
+  filter: blur(40px);
+  animation: causticsFloat 22s ease-in-out infinite alternate;
+  mix-blend-mode: overlay;
+  opacity: 0.85;
+}
+
+.dark .water-caustics-layer {
+  background-image: 
+    radial-gradient(ellipse 65% 50% at 25% 25%, rgba(30, 150, 165, 0.22), transparent 60%),
+    radial-gradient(ellipse 60% 45% at 75% 70%, rgba(14, 120, 135, 0.18), transparent 55%),
+    radial-gradient(ellipse 70% 60% at 50% 85%, rgba(8, 70, 85, 0.35), transparent 60%),
+    radial-gradient(circle at 60% 20%, rgba(46, 210, 195, 0.14), transparent 45%);
+  mix-blend-mode: screen;
+  opacity: 0.75;
+}
+
+/* Subtle Flowing Water Surface Ripples */
+.water-ripples-layer {
+  position: absolute;
+  inset: 0;
+  background: 
+    repeating-linear-gradient(
+      -35deg,
+      rgba(255, 255, 255, 0.02) 0px,
+      rgba(255, 255, 255, 0.02) 40px,
+      rgba(255, 255, 255, 0.06) 80px,
+      rgba(255, 255, 255, 0.02) 120px
+    );
+  animation: waveMotion 18s linear infinite;
+  opacity: 0.7;
+}
+
+.dark .water-ripples-layer {
+  background: 
+    repeating-linear-gradient(
+      -35deg,
+      rgba(46, 196, 182, 0.01) 0px,
+      rgba(46, 196, 182, 0.02) 50px,
+      rgba(46, 196, 182, 0.04) 100px,
+      rgba(46, 196, 182, 0.01) 150px
+    );
+  opacity: 0.55;
+}
+
+@keyframes waterDeepShift {
+  0% {
+    background-position: 0% 15%;
+  }
+  50% {
+    background-position: 100% 85%;
+  }
+  100% {
+    background-position: 30% 25%;
+  }
+}
+
+@keyframes causticsFloat {
+  0% {
+    transform: translate(0, 0) scale(1) rotate(0deg);
+  }
+  50% {
+    transform: translate(-3%, 4%) scale(1.08) rotate(3deg);
+  }
+  100% {
+    transform: translate(3%, -3%) scale(0.98) rotate(-2deg);
+  }
+}
+
+@keyframes waveMotion {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(120px);
+  }
+}
+
+/* Translucent Glass Panels: Truly Transparent with Refined Glassmorphism */
+.card-translucent {
+  background: rgba(255, 255, 255, 0.48);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  box-shadow: 0 8px 32px 0 rgba(3, 40, 52, 0.07), inset 0 1px 1px 0 rgba(255, 255, 255, 0.65);
+  border-radius: 0.875rem;
+}
+
+.dark .card-translucent {
+  background: rgba(6, 32, 41, 0.52);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(46, 196, 182, 0.22);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.35), inset 0 1px 1px 0 rgba(46, 196, 182, 0.25);
+  border-radius: 0.875rem;
+}
+
+/* Opaque Panels: For Critical Information Only */
+.card-opaque {
+  background: #FFFFFF;
+  border: 1px solid rgba(14, 120, 135, 0.25);
+  box-shadow: 0 4px 20px 0 rgba(3, 40, 52, 0.12);
+  border-radius: 0.875rem;
+}
+
+.dark .card-opaque {
+  background: #092C37;
+  border: 1px solid rgba(46, 196, 182, 0.35);
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.45);
+  border-radius: 0.875rem;
+}
+
+/* Glass Interactive Buttons & Inputs */
+.glass-input {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(255, 255, 255, 0.65);
+  color: var(--text-primary);
+  transition: all 0.2s ease;
+}
+
+.glass-input:focus {
+  background: rgba(255, 255, 255, 0.8);
+  border-color: #0EA5B7;
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(14, 165, 183, 0.25);
+}
+
+.dark .glass-input {
+  background: rgba(6, 32, 41, 0.65);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(46, 196, 182, 0.25);
+  color: var(--text-primary);
+}
+
+.dark .glass-input:focus {
+  background: rgba(6, 32, 41, 0.85);
+  border-color: #2ED1C0;
+  box-shadow: 0 0 0 3px rgba(46, 209, 192, 0.25);
+}
+
+/* Restrained Range Input Slider */
 input[type="range"] {
-  accent-color: #385A54;
+  accent-color: #086B7B;
 }
 
 .dark input[type="range"] {
-  accent-color: #A6BDB0;
+  accent-color: #2EC4B6;
 }
 
-/* Translucent & Opaque surface utility classes */
-.card-translucent {
-  @apply bg-white/75 dark:bg-[#1F2D29]/75 backdrop-blur-md border border-[var(--border-subtle)] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.03)];
-}
-
-.card-opaque {
-  @apply bg-white dark:bg-[#1C2825] border border-[var(--border-subtle)] rounded-xl shadow-[0_1px_3px_rgba(0,0,0,0.04)];
-}
-
+/* Chart Plotting Area: Clean Semi-Translucent Glass */
 .chart-plot-area {
   background-color: var(--plot-bg);
 }
