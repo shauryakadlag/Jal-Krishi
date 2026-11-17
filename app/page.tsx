@@ -309,7 +309,10 @@ export default function JalKrishiApp() {
               <button
                 key={item.id}
                 type="button"
-                onClick={() => setTab(item.id)}
+                onClick={() => {
+                  soundManager.playTabSwitch();
+                  setTab(item.id);
+                }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-xl text-xs font-semibold transition ${
                   active
                     ? "bg-gradient-to-r from-[#086B7B] to-[#0E94A5] text-white shadow-md dark:from-turquoise-500 dark:to-aqua-400 dark:text-[#021820]"
@@ -375,6 +378,7 @@ export default function JalKrishiApp() {
                       key={item.id}
                       type="button"
                       onClick={() => {
+                        soundManager.playTabSwitch();
                         setTab(item.id);
                         setMobileMenuOpen(false);
                       }}
@@ -818,6 +822,7 @@ export default function JalKrishiApp() {
                   type="button"
                   disabled={loading}
                   onClick={() => {
+                    soundManager.playConfirmation();
                     setIsDemoScenario(false);
                     runAnalyze({ is_demo_scenario: false });
                   }}

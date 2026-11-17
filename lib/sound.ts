@@ -46,87 +46,140 @@ class SoundEngine {
     return this.ctx;
   }
 
-  // Signature WWZ-inspired hover sound: ultra-short, crisp, high-tech micro-tone
-  public playHover(): void {
+  // Helper: Synthesize authentic Minecraft stone-placement impact (block.stone.place)
+  // Characteristic physical profile:
+  // 1. Initial crunchy gravel/stone particle attack (burst of filtered noise)
+  // 2. Heavy solid subterranean thud (resonant low pitch downward drop)
+  // 3. Dense woody/mineral acoustic body (warm short resonance, not metallic)
+  private playStonePlacementImpact(options: {
+    intensity: number;       // Master gain multiplier
+    pitchMultiplier: number; // Pitch variation
+    noiseCrunch: number;     // Crunch texture burst
+    bodyDecay: number;       // Resonance decay time (seconds)
+  }): void {
     if (this.isMuted || this.volume <= 0) return;
     const ctx = this.getAudioContext();
     if (!ctx) return;
 
     try {
       const now = ctx.currentTime;
+      const gainScale = this.volume * options.intensity;
+
+      // Master impact gain
       const masterGain = ctx.createGain();
-      // Scaled volume: hover sound is subtle and non-fatiguing
-      const hoverGain = 0.09 * this.volume;
       masterGain.gain.setValueAtTime(0.0001, now);
-      masterGain.gain.linearRampToValueAtTime(hoverGain, now + 0.002);
-      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.022);
+      masterGain.gain.linearRampToValueAtTime(gainScale, now + 0.002);
+      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + options.bodyDecay);
       masterGain.connect(ctx.destination);
 
-      // Primary tone: rapid downward sweep 2400Hz -> 1450Hz
-      const osc1 = ctx.createOscillator();
-      osc1.type = "sine";
-      osc1.frequency.setValueAtTime(2400, now);
-      osc1.frequency.exponentialRampToValueAtTime(1450, now + 0.02);
-      osc1.connect(masterGain);
-      osc1.start(now);
-      osc1.stop(now + 0.024);
+      // Layer 1: Crunchy stone-on-stone contact friction (bandpassed textured noise burst)
+      // Generates the tactile "crunch" of a stone block landing on rock
+      const noiseBuffer = ctx.createBuffer(1, Math.floor(ctx.sampleRate * 0.045), ctx.sampleRate);
+      const output = noiseBuffer.getChannelData(0);
+      for (let i = 0; i < noiseBuffer.length; i++) {
+        // High density random noise with rapid natural decay
+        const t = i / noiseBuffer.length;
+        output[i] = (Math.random() * 2 - 1) * Math.pow(1 - t, 2.5);
+      }
 
-      // Secondary transient: high-frequency metallic tick 3600Hz -> 2100Hz
-      const osc2 = ctx.createOscillator();
-      osc2.type = "triangle";
-      osc2.frequency.setValueAtTime(3600, now);
-      osc2.frequency.exponentialRampToValueAtTime(2100, now + 0.012);
-      const gain2 = ctx.createGain();
-      gain2.gain.setValueAtTime(hoverGain * 0.45, now);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.012);
-      osc2.connect(gain2);
-      gain2.connect(masterGain);
-      osc2.start(now);
-      osc2.stop(now + 0.014);
+      const noiseSource = ctx.createBufferSource();
+      noiseSource.buffer = noiseBuffer;
+
+      // Bandpass filter centered on mineral crunch frequencies (800Hz - 2200Hz)
+      const noiseFilter = ctx.createBiquadFilter();
+      noiseFilter.type = "bandpass";
+      noiseFilter.frequency.setValueAtTime(1400 * options.pitchMultiplier, now);
+      noiseFilter.Q.setValueAtTime(1.8, now);
+
+      const noiseGain = ctx.createGain();
+      noiseGain.gain.setValueAtTime(gainScale * options.noiseCrunch, now);
+      noiseGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.035);
+
+      noiseSource.connect(noiseFilter);
+      noiseFilter.connect(noiseGain);
+      noiseGain.connect(masterGain);
+      noiseSource.start(now);
+      noiseSource.stop(now + 0.045);
+
+      // Layer 2: Solid stone mass thud (low-frequency mineral body, triangular wave)
+      // Gives the heavy, weighted tactile punch characteristic of stone blocks
+      const oscLow = ctx.createOscillator();
+      oscLow.type = "triangle";
+      const startFreq = 160 * options.pitchMultiplier;
+      const endFreq = 68 * options.pitchMultiplier;
+      oscLow.frequency.setValueAtTime(startFreq, now);
+      oscLow.frequency.exponentialRampToValueAtTime(endFreq, now + options.bodyDecay * 0.7);
+
+      const oscLowGain = ctx.createGain();
+      oscLowGain.gain.setValueAtTime(gainScale * 1.2, now);
+      oscLowGain.gain.exponentialRampToValueAtTime(0.0001, now + options.bodyDecay);
+
+      oscLow.connect(oscLowGain);
+      oscLowGain.connect(masterGain);
+      oscLow.start(now);
+      oscLow.stop(now + options.bodyDecay);
+
+      // Layer 3: Warm stone resonance body (sine wave at mid-low mineral frequency ~280Hz)
+      const oscMid = ctx.createOscillator();
+      oscMid.type = "sine";
+      oscMid.frequency.setValueAtTime(290 * options.pitchMultiplier, now);
+      oscMid.frequency.exponentialRampToValueAtTime(110 * options.pitchMultiplier, now + 0.04);
+
+      const oscMidGain = ctx.createGain();
+      oscMidGain.gain.setValueAtTime(gainScale * 0.75, now);
+      oscMidGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.045);
+
+      oscMid.connect(oscMidGain);
+      oscMidGain.connect(masterGain);
+      oscMid.start(now);
+      oscMid.stop(now + 0.05);
+
     } catch {
       // Audio execution blocked or unsupported
     }
   }
 
-  // Confirmation click sound: slightly deeper, solid tactile click
+  // Hover: Full, solid, satisfying stone-placement-inspired impact
+  public playHover(): void {
+    // Subtle natural pitch variance (0.96 to 1.04) prevents acoustic fatigue on rapid hovers
+    const pitchVar = 0.96 + Math.random() * 0.08;
+    this.playStonePlacementImpact({
+      intensity: 0.38,
+      pitchMultiplier: pitchVar,
+      noiseCrunch: 1.1,
+      bodyDecay: 0.065,
+    });
+  }
+
+  // Click / Selection: Decisive, satisfying solid stone impact
   public playClick(): void {
-    if (this.isMuted || this.volume <= 0) return;
-    const ctx = this.getAudioContext();
-    if (!ctx) return;
+    const pitchVar = 0.94 + Math.random() * 0.06;
+    this.playStonePlacementImpact({
+      intensity: 0.65,
+      pitchMultiplier: pitchVar,
+      noiseCrunch: 1.4,
+      bodyDecay: 0.085,
+    });
+  }
 
-    try {
-      const now = ctx.currentTime;
-      const masterGain = ctx.createGain();
-      const clickGain = 0.15 * this.volume;
-      masterGain.gain.setValueAtTime(0.0001, now);
-      masterGain.gain.linearRampToValueAtTime(clickGain, now + 0.003);
-      masterGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.038);
-      masterGain.connect(ctx.destination);
+  // Tab Switching: Recognizable stone-placement sound
+  public playTabSwitch(): void {
+    this.playStonePlacementImpact({
+      intensity: 0.60,
+      pitchMultiplier: 1.05,
+      noiseCrunch: 1.3,
+      bodyDecay: 0.080,
+    });
+  }
 
-      // Primary click tone: 920Hz down to 420Hz
-      const osc1 = ctx.createOscillator();
-      osc1.type = "sine";
-      osc1.frequency.setValueAtTime(920, now);
-      osc1.frequency.exponentialRampToValueAtTime(420, now + 0.035);
-      osc1.connect(masterGain);
-      osc1.start(now);
-      osc1.stop(now + 0.04);
-
-      // Warm resonance body tone: 220Hz
-      const osc2 = ctx.createOscillator();
-      osc2.type = "triangle";
-      osc2.frequency.setValueAtTime(260, now);
-      osc2.frequency.exponentialRampToValueAtTime(140, now + 0.03);
-      const gain2 = ctx.createGain();
-      gain2.gain.setValueAtTime(clickGain * 0.5, now);
-      gain2.gain.exponentialRampToValueAtTime(0.0001, now + 0.03);
-      osc2.connect(gain2);
-      gain2.connect(masterGain);
-      osc2.start(now);
-      osc2.stop(now + 0.035);
-    } catch {
-      // Audio execution blocked or unsupported
-    }
+  // Confirmation / Execute: Deeper, heavier, solid impact
+  public playConfirmation(): void {
+    this.playStonePlacementImpact({
+      intensity: 0.85,
+      pitchMultiplier: 0.82,
+      noiseCrunch: 1.7,
+      bodyDecay: 0.12,
+    });
   }
 
   public setMuted(muted: boolean): void {
@@ -140,7 +193,7 @@ class SoundEngine {
   public toggleMuted(): boolean {
     this.setMuted(!this.isMuted);
     if (!this.isMuted) {
-      // Play brief test click on unmute
+      // Play solid stone placement feedback on unmute
       this.playClick();
     }
     return this.isMuted;

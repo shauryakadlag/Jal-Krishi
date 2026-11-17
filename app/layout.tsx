@@ -30,6 +30,8 @@ const themeInitScript = `
 })();
 `;
 
+import RealisticWaterCanvas from "@/components/RealisticWaterCanvas";
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -41,15 +43,11 @@ export default function RootLayout({
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
       </head>
       <body className={`${inter.variable} ${notoSansDevanagari.variable} min-h-screen font-sans overflow-x-hidden relative`}>
-        {/* Full-Website Crystal-Clear Flowing Water Background with Visible Continuous Wave Motion */}
+        {/* Realistic 3D Crystal-Clear Water Surface via WebGL */}
+        <RealisticWaterCanvas />
+        {/* Ambient CSS Color & Caustic Accent Backing */}
         <div className="water-world-bg" aria-hidden="true">
           <div className="water-caustics-layer" />
-          <div className="water-flow-waves">
-            <div className="water-wave water-wave-1" />
-            <div className="water-wave water-wave-2" />
-            <div className="water-wave water-wave-3" />
-          </div>
-          <div className="water-ripples-layer" />
         </div>
         {children}
       </body>
