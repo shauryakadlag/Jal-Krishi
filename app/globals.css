@@ -2,18 +2,47 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --bg-primary: #F5F6F2;
+  --bg-surface: #DFE9E3;
+  --bg-card: #FFFFFF;
+  --text-primary: #1B2623;
+  --text-secondary: #5C6862;
+  --border-subtle: #D5DBD2;
+  --accent-teal: #385A54;
+  --accent-blue: #779AA0;
+  --accent-sage: #A6BDB0;
+}
+
+.dark {
+  --bg-primary: #111917;
+  --bg-surface: #1A2623;
+  --bg-card: #1F2D29;
+  --text-primary: #EDF2EF;
+  --text-secondary: #A3B3AC;
+  --border-subtle: #2D3F3A;
+  --accent-teal: #A6BDB0;
+  --accent-blue: #779AA0;
+  --accent-sage: #385A54;
+}
+
 @layer base {
   html {
-    font-family: var(--font-mukta), var(--font-noto-devanagari), system-ui, sans-serif;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans Devanagari", "Mukta", sans-serif;
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    @apply bg-soil-50 text-soil-900 antialiased;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    @apply antialiased transition-colors duration-200;
   }
 }
 
-/* Custom range slider for touch-friendly What-If */
 input[type="range"] {
-  accent-color: #2e7d32;
+  accent-color: #385A54;
+}
+
+.dark input[type="range"] {
+  accent-color: #A6BDB0;
 }

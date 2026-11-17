@@ -23,37 +23,53 @@ export function WaterBalanceBarChart({
     {
       name: lang === "mr" ? "गरज (ETc)" : "Demand (ETc)",
       mm: crop.water_demand_etc_mm,
-      fill: "#8c5a2b",
+      fill: "#385A54",
     },
     {
       name: lang === "mr" ? "प्रभावी पाऊस" : "Eff. Rain",
       mm: crop.effective_rain_mm,
-      fill: "#0277bd",
+      fill: "#779AA0",
     },
     {
-      name: lang === "mr" ? "विश्वसनीय सिंचन" : "Rel. Irrig.",
+      name: lang === "mr" ? "सिंचन" : "Rel. Irrig.",
       mm: crop.reliable_irrigation_mm,
-      fill: "#2e7d32",
+      fill: "#A6BDB0",
     },
     {
-      name: lang === "mr" ? "पाण्याची तूट" : "Water Gap",
+      name: lang === "mr" ? "तूट (Gap)" : "Water Gap",
       mm: crop.water_gap_mm,
-      fill: "#c62828",
+      fill: "#B83B35",
     },
   ];
 
   return (
-    <div className="h-52 w-full">
+    <div className="h-56 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 8, left: -12, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e6d3b8" />
-          <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#36210f" }} />
-          <YAxis tick={{ fontSize: 11, fill: "#36210f" }} unit=" mm" />
+        <BarChart data={data} margin={{ top: 10, right: 8, left: -10, bottom: 4 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" vertical={false} />
+          <XAxis
+            dataKey="name"
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={{ stroke: "var(--border-subtle)" }}
+            tickLine={false}
+          />
+          <YAxis
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={false}
+            tickLine={false}
+            unit=" mm"
+          />
           <Tooltip
             formatter={(val: number) => [`${val} mm`, ""]}
-            contentStyle={{ fontSize: 12, borderRadius: 8 }}
+            contentStyle={{
+              fontSize: 12,
+              borderRadius: 10,
+              backgroundColor: "var(--bg-card)",
+              borderColor: "var(--border-subtle)",
+              color: "var(--text-primary)",
+            }}
           />
-          <Bar dataKey="mm" radius={[6, 6, 0, 0]}>
+          <Bar dataKey="mm" radius={[8, 8, 0, 0]}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}
@@ -75,37 +91,53 @@ export function ScoreWaterfallChart({
     {
       name: lang === "mr" ? "पाणी (45%)" : "Water (45%)",
       score: crop.scores.water_fit,
-      fill: "#0277bd",
+      fill: "#779AA0",
     },
     {
       name: lang === "mr" ? "अवस्था (20%)" : "Stage (20%)",
       score: crop.scores.stage_fit,
-      fill: "#2e7d32",
+      fill: "#385A54",
     },
     {
       name: lang === "mr" ? "हंगाम (20%)" : "Season (20%)",
       score: crop.scores.season_fit,
-      fill: "#8c5a2b",
+      fill: "#A6BDB0",
     },
     {
       name: lang === "mr" ? "उष्णता (15%)" : "Heat (15%)",
       score: crop.scores.heat_fit,
-      fill: "#b26a00",
+      fill: "#A86A14",
     },
   ];
 
   return (
-    <div className="h-48 w-full">
+    <div className="h-52 w-full">
       <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={data} margin={{ top: 10, right: 8, left: -16, bottom: 4 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#e6d3b8" />
-          <XAxis dataKey="name" tick={{ fontSize: 11, fill: "#36210f" }} />
-          <YAxis domain={[0, 100]} tick={{ fontSize: 11, fill: "#36210f" }} />
+        <BarChart data={data} margin={{ top: 10, right: 8, left: -14, bottom: 4 }}>
+          <CartesianGrid strokeDasharray="3 3" stroke="var(--border-subtle)" vertical={false} />
+          <XAxis
+            dataKey="name"
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={{ stroke: "var(--border-subtle)" }}
+            tickLine={false}
+          />
+          <YAxis
+            domain={[0, 100]}
+            tick={{ fontSize: 11, fill: "var(--text-secondary)" }}
+            axisLine={false}
+            tickLine={false}
+          />
           <Tooltip
             formatter={(val: number) => [`${val} / 100`, ""]}
-            contentStyle={{ fontSize: 12, borderRadius: 8 }}
+            contentStyle={{
+              fontSize: 12,
+              borderRadius: 10,
+              backgroundColor: "var(--bg-card)",
+              borderColor: "var(--border-subtle)",
+              color: "var(--text-primary)",
+            }}
           />
-          <Bar dataKey="score" radius={[6, 6, 0, 0]}>
+          <Bar dataKey="score" radius={[8, 8, 0, 0]}>
             {data.map((entry, idx) => (
               <Cell key={idx} fill={entry.fill} />
             ))}
